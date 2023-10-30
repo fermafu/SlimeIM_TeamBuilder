@@ -9,10 +9,27 @@
       #gameContainer { width: 100vw; height: 100vh; }
       canvas { width: 100%; height: 100%; }
     </style>
-    <script src="Build/UnityLoader.js"></script>
     <script>
-    var gameInstance = UnityLoader.instantiate("gameContainer", "Build/dist.json");
-    </script>
+function resizeGame() {
+      var gameContainer = document.getElementById("unity-container");
+      var widthToHeight = 16 / 9;
+      var newWidth = window.innerWidth;
+      var newHeight = window.innerHeight;
+      var newWidthToHeight = newWidth / newHeight;
+
+      if (newWidthToHeight > widthToHeight) {
+          newWidth = newHeight * widthToHeight;
+        } else {
+          newHeight = newWidth / widthToHeight;
+      }
+
+      gameContainer.style.width = newWidth + 'px';
+      gameContainer.style.height = newHeight + 'px';
+    }
+
+    window.addEventListener('resize', resizeGame, false);
+    resizeGame();
+</script>
   </head>
 
   <body>
